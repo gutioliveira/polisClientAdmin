@@ -14,6 +14,8 @@ import Radium from "radium";
 import _ from "lodash";
 import { handleZidMetadataUpdate, optimisticZidMetadataUpdateOnTyping } from "../../actions";
 import Checkbox from "material-ui/lib/checkbox";
+import ComponentHelpers from "../../util/component-helpers";
+import NoPermission from "./no-permission";
 import InputField from "material-ui/lib/text-field";
 import settings from "../../settings";
 import Spinner from "../framework/spinner";
@@ -125,7 +127,12 @@ class ConversationConfig extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
+
+    if (ComponentHelpers.shouldShowPermissionsError(this.props)) {
+      return <NoPermission/>
+    }
+
     return (
       <div style={styles.container}>
         <div style={styles.configCard}>
