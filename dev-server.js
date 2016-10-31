@@ -17,7 +17,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 function proxy (req, res) {
   var x = request({
-    url: "http://localhost:5000" + req.path,
+    url: "http://" + process.env.POLIS_SERVER_DOMAIN + ":5000" + req.path,
     qs: req.query,
     headers: req.headers,
     rejectUnauthorized:false,
@@ -43,7 +43,7 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(5002, 'localhost', function(err) {
+app.listen(5002, '0.0.0.0', function(err) {
   if (err) {
     console.log("error", err);
     return;
